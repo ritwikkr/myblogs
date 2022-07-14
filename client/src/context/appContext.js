@@ -5,7 +5,11 @@ import reducer from "./reducer";
 import {
   GET_BLOGS_SUCCESS,
   GET_BLOG_SUCCESS,
+  HIDE_ALERT,
+  LOGIN_USER_ERROR,
+  LOGIN_USER_SUCCESS,
   LOGOUT_USER_SUCCESS,
+  REGISTER_USER_ERROR,
   REGISTER_USER_SUCCESS,
 } from "./actions";
 
@@ -17,6 +21,9 @@ const initialState = {
   blog: {},
   user: user ? JSON.parse(user) : null,
   token: token || "",
+  showAlert: false,
+  alertType: "",
+  alertText: "",
 };
 
 const AppContext = React.createContext();
@@ -69,12 +76,46 @@ const AppProvider = ({ children }) => {
 
   async function registerUser(userDetails) {
     try {
+      const { username, email, password } = userDetails;
+      if (!username || !email || !password) {
+        dispatch({
+          type: REGISTER_USER_ERROR,
+          payload: "Please provide all values",
+        });
+        hideAlert();
+        return;
+      }
       const { data } = await authRequest.post("/register", userDetails);
       dispatch({ type: REGISTER_USER_SUCCESS, payload: { data } });
       localStorage.setItem("user", JSON.stringify(data.response));
       localStorage.setItem("token", data.token);
     } catch (error) {
       console.log(error);
+      dispatch({ type: REGISTER_USER_ERROR, payload: error.response.data });
+      hideAlert();
+    }
+  }
+
+  async function loginUser(userDetails) {
+    try {
+      const { email, password } = userDetails;
+      if (!email || !password) {
+        dispatch({
+          type: LOGIN_USER_ERROR,
+          payload: "Please provide all values",
+        });
+        hideAlert();
+        return;
+      }
+      const { data } = await authRequest.post("/login", userDetails);
+      console.log(data);
+      dispatch({ type: LOGIN_USER_SUCCESS, payload: data });
+      localStorage.setItem("user", JSON.stringify(data.response));
+      localStorage.setItem("token", JSON.stringify(data.token));
+    } catch (error) {
+      console.log(error.response.data);
+      dispatch({ type: LOGIN_USER_ERROR, payload: error.response.data });
+      hideAlert();
     }
   }
 
@@ -89,9 +130,25 @@ const AppProvider = ({ children }) => {
     }
   }
 
+  // Alert-----------------------------------------------------------------------------
+
+  function hideAlert() {
+    setTimeout(() => {
+      dispatch({ type: HIDE_ALERT });
+    }, 2000);
+  }
+
   return (
     <AppContext.Provider
-      value={{ ...state, getBlogs, getBlog, publish, registerUser, logoutUser }}
+      value={{
+        ...state,
+        getBlogs,
+        getBlog,
+        publish,
+        registerUser,
+        logoutUser,
+        loginUser,
+      }}
     >
       {children}
     </AppContext.Provider>

@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 const authSchema = new mongoose.Schema(
   {
     username: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
   },
   { timestamps: true }
@@ -20,6 +20,11 @@ authSchema.methods.createJWT = function () {
   return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, {
     expiresIn: "1d",
   });
+};
+
+authSchema.methods.comparePassword = async function (pass) {
+  const isMatched = await bcrypt.compare(pass, this.password);
+  return isMatched;
 };
 
 export default mongoose.model("Auth", authSchema);

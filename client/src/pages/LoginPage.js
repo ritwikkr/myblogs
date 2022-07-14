@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAppContext } from "../context/appContext";
 import { useNavigate } from "react-router-dom";
 import Wrapper from "../wrapper/LoginPageWrapper";
+import Alert from "../components/Alert";
 
 function LoginPage() {
   const [login, setLogin] = useState(false);
@@ -10,7 +11,7 @@ function LoginPage() {
     email: "",
     password: "",
   });
-  const { registerUser, user } = useAppContext();
+  const { registerUser, user, loginUser, showAlert } = useAppContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +25,8 @@ function LoginPage() {
     const { username, email, password } = userDetails;
     if (!login) {
       registerUser({ username, email, password });
+    } else {
+      loginUser({ email, password });
     }
   }
   return (
@@ -36,6 +39,7 @@ function LoginPage() {
       </div>
       <div className="body">
         <form onSubmit={formHandler}>
+          {showAlert && <Alert />}
           <div className="heading">
             <h2>{login ? "login" : "register"}</h2>
           </div>

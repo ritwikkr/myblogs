@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import Wrapper from "../wrapper/WritePageWrapper";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useAppContext } from "../context/appContext";
+import { useNavigate } from "react-router-dom";
 
 function WritePage() {
   const [rows] = useState(10);
   const [blogPost, setBlogPost] = useState({ title: "", content: "" });
 
   const { publish } = useAppContext();
+  const navigate = useNavigate();
 
   function formSubmitHandler(e) {
     e.preventDefault();
     publish(blogPost);
+    navigate("/");
   }
   return (
     <Wrapper>

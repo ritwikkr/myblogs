@@ -24,9 +24,9 @@ function HomePage() {
               <Blog key={blog._id} {...blog} />
             ))}
           </div>
-          <aside>
+          {/* <aside>
             <Aside />
-          </aside>
+          </aside> */}
         </div>
       </div>
     </Wrapper>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAppContext } from "../context/appContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Wrapper from "../wrapper/LoginPageWrapper";
 import Alert from "../components/Alert";
 
@@ -83,6 +83,13 @@ function LoginPage() {
               <button type="submit">{login ? "login" : "register"}</button>
             </div>
           </div>
+          {login && (
+            <Link to="/forgotPassword">
+              <div className="form-content">
+                <p>Forgot Password? Click here to Reset</p>
+              </div>
+            </Link>
+          )}
         </form>
       </div>
     </Wrapper>

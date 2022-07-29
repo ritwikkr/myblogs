@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   /* border: 2px solid red; */
-  width: 30%;
-  padding: 20px;
+  /* width: 30%; */
+  width: 350px;
+  padding: 10px;
   margin: 20px;
   .body {
     /* border: 2px solid green; */
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     > .img {
       /* border: 2px solid green; */
-      width: 350px;
+      width: 90%;
       height: 350px;
       > img {
         height: 100%;

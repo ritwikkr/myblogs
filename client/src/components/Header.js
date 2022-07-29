@@ -52,18 +52,20 @@ function Header() {
           <Link to={"/"} style={{ textDecoration: "unset", color: "unset" }}>
             <p>home</p>
           </Link>
-          <Link
+          {/* <Link
             to={"/about"}
             style={{ textDecoration: "unset", color: "unset" }}
           >
             <p>about</p>
-          </Link>
-          <Link
-            to={"/write"}
-            style={{ textDecoration: "unset", color: "unset" }}
-          >
-            <p>write</p>
-          </Link>
+          </Link> */}
+          {user && (
+            <Link
+              to={"/write"}
+              style={{ textDecoration: "unset", color: "unset" }}
+            >
+              <p>write</p>
+            </Link>
+          )}
           {user ? (
             <p onClick={() => logoutUser()} focus="true">
               logout

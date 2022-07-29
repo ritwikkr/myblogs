@@ -8,13 +8,19 @@ function WritePage() {
   const [rows] = useState(10);
   const [blogPost, setBlogPost] = useState({ title: "", content: "" });
 
-  const { publish } = useAppContext();
+  const { publish, isJwtExpired } = useAppContext();
   const navigate = useNavigate();
 
   function formSubmitHandler(e) {
     e.preventDefault();
-    publish(blogPost);
-    navigate("/");
+    // publish(blogPost);
+    console.log(isJwtExpired);
+    if (!isJwtExpired) {
+      console.log(`in jwt expired`);
+    }
+    // setTimeout(() => {
+    //   navigate("/");
+    // }, 2000);
   }
   return (
     <Wrapper>

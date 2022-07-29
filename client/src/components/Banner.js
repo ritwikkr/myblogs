@@ -4,12 +4,9 @@ import styled from "styled-components";
 function Banner() {
   return (
     <Wrapper>
-      <div className="display">
-        <h1>blogs</h1>
-      </div>
       <img
-        src="https://images.unsplash.com/photo-1500989145603-8e7ef71d639e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80"
-        alt="banner"
+        src="https://img.freepik.com/free-photo/toy-bricks-table-with-word-blog_144627-47465.jpg?size=626&ext=jpg"
+        alt=""
       />
     </Wrapper>
   );

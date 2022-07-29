@@ -6,6 +6,7 @@ const blogsSchema = new mongoose.Schema(
     image: { type: String },
     content: { type: String, required: true },
     author: { type: String, required: true },
+    authId: { type: mongoose.Types.ObjectId, required: true },
   },
   { timestamps: true }
 );

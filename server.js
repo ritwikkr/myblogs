@@ -15,9 +15,9 @@ app.use("/api/v1/blogs", blogsRoutes);
 app.use("/api/v1/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
-function start() {
+async function start() {
   try {
-    connectDB(process.env.MONGO_URI);
+    await connectDB(process.env.MONGO_URI);
     app.listen(PORT, () => {
       console.log(`Server running at PORT:${PORT}...`);
     });

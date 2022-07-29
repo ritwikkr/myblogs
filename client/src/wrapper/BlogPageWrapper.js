@@ -37,13 +37,22 @@ const Wrapper = styled.div`
         }
       }
     }
-    > .back {
-      margin-top: 10px;
-      margin-left: 10px;
-      button {
-        text-transform: uppercase;
-        background-color: transparent;
+    > .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      > .back {
+        margin: 10px 0 0 10px;
+        button {
+          text-transform: uppercase;
+          background-color: transparent;
+          cursor: pointer;
+        }
+        margin-right: 20px;
+      }
+      > .delete {
         cursor: pointer;
+        margin: 10px;
       }
     }
   }

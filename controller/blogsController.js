@@ -32,6 +32,7 @@ async function getBlog(req, res) {
 
 async function publishArticle(req, res) {
   try {
+    // console.log(req.user);
     const { title, content } = req.body;
     const user = await Auth.findById(req.user.userId);
     const author = user.username;
@@ -39,11 +40,31 @@ async function publishArticle(req, res) {
     const result = await axios.get(uri);
     const randNum = Math.floor(Math.random() * 10);
     const image = result.data.results[randNum].urls.full;
-    const response = await blogs.create({ title, content, author, image });
+    const response = await blogs.create({
+      title,
+      content,
+      author,
+      image,
+      authId: req.user.userId,
+    });
     res.json(response);
   } catch (error) {
     res.status(401).json(error);
   }
 }
 
-export { getBlogs, postBlogs, getBlog, publishArticle };
+async function deleteBlog(req, res) {
+  try {
+    const { id } = req.params;
+    const isPresent = await blogs.findById(id);
+    if (!isPresent) {
+      return res.status(401).json("No such blog present");
+    }
+    const action = await blogs.findByIdAndDelete(id);
+    res.json(action);
+  } catch (error) {
+    res.status(401).json(error);
+  }
+}
+
+export { getBlogs, postBlogs, getBlog, publishArticle, deleteBlog };

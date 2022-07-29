@@ -13,3 +13,7 @@ export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS";
 
 // Alert-----------------------------------------------
 export const HIDE_ALERT = "HIDE_ALERT";
+
+// JWT_EXPIRED
+
+export const JWT_EXPIRED = "JWT_EXPIRED";

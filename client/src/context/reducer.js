@@ -2,6 +2,7 @@ import {
   GET_BLOGS_SUCCESS,
   GET_BLOG_SUCCESS,
   HIDE_ALERT,
+  JWT_EXPIRED,
   LOGIN_USER_ERROR,
   LOGIN_USER_SUCCESS,
   LOGOUT_USER_SUCCESS,
@@ -73,6 +74,16 @@ function reducer(state, action) {
     return {
       ...state,
       showAlert: false,
+    };
+  }
+
+  // JWT EXPIRED
+  if (action.type === JWT_EXPIRED) {
+    console.log(`i reducer`);
+    return {
+      ...state,
+      isJwtExpired: true,
+      jwtError: action.payload.message,
     };
   }
 }

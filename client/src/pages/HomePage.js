@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Aside from "../components/Aside";
+// import Aside from "../components/Aside";
 import Banner from "../components/Banner";
 import Blog from "../components/Blog";
 import Wrapper from "../wrapper/HomePageWrapper";
@@ -10,7 +10,7 @@ function HomePage() {
   const { getBlogs, blogs } = useAppContext();
   useEffect(() => {
     getBlogs();
-  }, []);
+  }, [getBlogs]);
   if (blogs.length < 1) {
     return <Loading />;
   }
